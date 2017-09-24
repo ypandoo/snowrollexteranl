@@ -30,6 +30,7 @@ export class Post {
     audio: Audio[];
     num_comments: number;
     comments: Comments[];
+    music:Music;
 }
 
 export class Audio {
@@ -44,4 +45,17 @@ export class Comments {
     created_at: string;
     comment: string;
     location: string;
+}
+
+export class Music {
+    image_audio1: string;
+    image_audio1_x: number;
+    image_audio1_y: number;
+    music_album: string;
+    music_artist: string;
+    music_cover_url: string;
+    music_id: string;
+    music_source: string;
+    music_title: string;
+    photo: string;
 }

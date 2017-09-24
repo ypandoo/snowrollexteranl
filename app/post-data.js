@@ -17,4 +17,10 @@ var Comments = (function () {
     return Comments;
 }());
 exports.Comments = Comments;
+var Music = (function () {
+    function Music() {
+    }
+    return Music;
+}());
+exports.Music = Music;
 //# sourceMappingURL=post-data.js.map

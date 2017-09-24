@@ -48,33 +48,70 @@ export class PostComponent implements OnInit {
     parseData(data: any) : void {
         this.setMetaData(data);
 
-        data.images = [data.image_url];
+        if( typeof(data.music) == 'object')
+        {
+            data.images = [data.music.photo];
+            data.num_images = 1;
+            data.image_url = data.music.photo;
 
-        for (let i = 2; i <= data.num_images; i++) {
-            data.images.push(data['image' + i + '_url' ]);
-        }
+            for (let i = 2; i <= data.num_images; i++) {
+                data.images.push(data['image' + i + '_url']);
+            }
 
-        data.img_grid = 'img-grid-' + Math.min(data.num_images, 3);
-        data.more_img_count = data.num_images - 3;
+            data.img_grid = 'img-grid-' + Math.min(data.num_images, 3);
+            data.more_img_count = data.num_images - 3;
 
-        data.audio = [];
+            data.audio = [{
+                url: data['music']['image_audio1'],
+                x: 0.4613,
+                y: 0.4613
+            }];
 
-        for (let i = 1; i <= 3; i++) {
-            if (typeof data['audio' + i + '_x'] === 'number') {
-                data.audio.push({
-                    url: data['audio' + i + '_url' ],
-                    x: data['audio' + i + '_x' ],
-                    y: data['audio' + i + '_y' ]
-                });
+            // for (let i = 1; i <= 3; i++) {
+            //     if (typeof data['audio' + i + '_x'] === 'number') {
+            //         data.audio.push({
+            //             url: data['audio' + i + '_url'],
+            //             x: data['audio' + i + '_x'],
+            //             y: data['audio' + i + '_y']
+            //         });
+            //     }
+            // }
+        }else{
+            data.images = [data.image_url];
+
+            for (let i = 2; i <= data.num_images; i++) {
+                data.images.push(data['image' + i + '_url']);
+            }
+
+            data.img_grid = 'img-grid-' + Math.min(data.num_images, 3);
+            data.more_img_count = data.num_images - 3;
+
+            data.audio = [];
+
+            for (let i = 1; i <= 3; i++) {
+                if (typeof data['audio' + i + '_x'] === 'number') {
+                    data.audio.push({
+                        url: data['audio' + i + '_url'],
+                        x: data['audio' + i + '_x'],
+                        y: data['audio' + i + '_y']
+                    });
+                }
             }
         }
+
 
         this.post = data;
     }
 
     setMetaData(post: Post) : void {
         this.metaService.setTitle('SnowRoll Post by ' + post.username);
-        this.metaService.setTag('og:image', post.image_url);
+        if(typeof (post.music) == 'object')
+        {
+            this.metaService.setTag('og:image', post.music.photo);
+        }else
+        {
+            this.metaService.setTag('og:image', post.image_url);
+        }
         this.metaService.setTag('og:url', 'http://share.snowroll.me/posts/' + this.id);
     }
 

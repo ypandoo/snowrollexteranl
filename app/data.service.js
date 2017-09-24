@@ -15,7 +15,7 @@ var DataService = (function () {
     function DataService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.apiUrl = 'https://api-dev.snowroll.me/v1/snowroll/getpostexternal?post_id=';
+        this.apiUrl = 'https://api.snowroll.me/v1/snowroll/getpostexternal?post_id=';
     }
     DataService.prototype.getPostData = function (id) {
         var _this = this;

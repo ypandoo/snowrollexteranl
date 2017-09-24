@@ -8,7 +8,7 @@ import { Post } from './post-data';
 @Injectable()
 export class DataService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private apiUrl  = 'https://api-dev.snowroll.me/v1/snowroll/getpostexternal?post_id=';
+    private apiUrl  = 'https://api.snowroll.me/v1/snowroll/getpostexternal?post_id=';
 
     constructor(private http: Http) { }
 
