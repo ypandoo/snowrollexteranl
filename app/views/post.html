@@ -1,0 +1,66 @@
+<main *ngIf="post" class="page-body">
+    <section class="post-head section">
+        <span class="user-img" [style.background-image]="'url(' + post.profile_pic + ')'"></span>
+        <div class="user-text">
+            <h4 class="username">{{post.username}}</h4>
+            <span class="date">{{post.created_at | date:'MMM d h:mma'}}</span>
+        </div>
+        <div class="follow-user">
+            <a class="follow-button" href=""></a>
+        </div>
+        <p class="post-cutline">{{post.description}}</p>
+    </section>
+
+    <section class="post-content section">
+
+        <div class="post-img {{post.img_grid}}-1" [style.background-image]="'url(' + post.image_url + ')'" (click)="openSlideshow(0)">
+            <span *ngFor="let audio of post.audio;let i=index" id = "audio-clip{{i+1}}" class="audio-clip" [style.left]="audio.x*100 +'%'" [style.top]="audio.y*100 +'%'" [style.background-image]="getBackgrond(i+1)" (click)="playAudio(audio.url);iconAnimate(i+1);"></span>
+        </div>
+        <img style="background-image: url('assets/img/vanimation/voiceimg1.svg'); visibility: hidden;">
+        <img style="background-image: url('assets/img/vanimation/voiceimg2.svg');visibility: hidden;">
+        <img style="background-image: url('assets/img/vanimation/voiceimg3.svg');visibility: hidden;">
+
+        <div *ngIf="post?.image2_url" class="post-img {{post.img_grid}}-2" [style.background-image]="'url(' + post.image2_url + ')'" (click)="openSlideshow(1)"></div>
+        <div *ngIf="post?.image3_url" class="post-img {{post.img_grid}}-3" [style.background-image]="'url(' + post.image3_url + ')'" (click)="openSlideshow(2)">
+            <span *ngIf="post.num_images > 3" class="more-imgs">
+                +{{post.more_img_count}}
+            </span>
+        </div>
+    </section>
+
+    <section class="post-meta section">
+        <span class="post-range"><b>{{post.likes}}</b></span>
+    </section>
+
+    <section class="post-comments section">
+        <h3 *ngIf="post.num_comments > 0" class="comments-head">Comments</h3>
+        <div *ngFor="let comment of post.comments" class="comment">
+            <span class="user-img" [style.background-image]="'url(' + comment.profile_pic + ')'"></span>
+            <div class="user-text">
+                <h4 class="username">{{comment.username}}</h4>
+                <span class="date">{{comment.created_at | date:'MMM d h:mma'}}</span>
+            </div>
+            <!-- <span class="comment-push">0</span> -->
+            <p class="comment-text">{{comment.comment}}</p>
+        </div>
+        <div class="comment-footer">
+            <a class="more-comments" href="https://itunes.apple.com/us/app/snowroll-voicetags-to-make-your-photos-alive/id1219000500?mt=8">Open in App to see {{post.num_comments}} Comments</a>
+        </div>
+    </section>
+</main>
+
+<main *ngIf="slide > -1" class="slideshow-container">
+    <span class="close-slideshow" (click)="closeSlideshow()">x</span>
+    <section class="slideshow-content section">
+        <div class="slider" [style.width]="100 * post.num_images +'%'" [style.left]="slide * -100 +'%'">
+            <div *ngFor="let image of post.images" class="slide-img" [style.background-image]="'url(' + image + ')'" [style.width]="100 / post.num_images +'%'"></div>
+        </div>
+    </section>
+    <section *ngIf="post.num_images > 1" class="slideshow-nav section">
+        <div class="visual-nav">
+            <span *ngFor="let image of post.images; let i = index;" class="dot" [ngClass]="{selected: i === slide}" (click)="moveSlideshow(i)"></span>
+        </div>
+        <span class="arrow-left" (click)="moveSlideshow(slide - 1)"></span>
+        <span class="arrow-right" (click)="moveSlideshow(slide + 1)"></span>
+    </section>
+</main>
