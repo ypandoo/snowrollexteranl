@@ -27,6 +27,7 @@ export class PostComponent implements OnInit {
     private timer_id: any = null;
     private image_index: any = 0;
     private audio_player: any = null;
+    private play_wave: any = 0;
     constructor(
         private dataService: DataService,
         private route: ActivatedRoute,
@@ -125,12 +126,27 @@ export class PostComponent implements OnInit {
         clearInterval(this.timer_id);
         this.timer_id = setInterval(function(){
             if(that.audio_player.isStop())
+            {
                 that.span_index = null;
+                that.play_wave = 0;
+            }    
             else
+            {
                 that.span_index = index;
+                that.checkWave();
+            }    
             that.image_index = 3 - (tindex % 3);
             tindex ++;
         },150);
+    }
+
+    checkWave(): void {
+
+        if (typeof (this.post.music) == 'object') {
+            this.play_wave = 1;
+        } else {
+            this.play_wave = 0;
+        }
     }
 
     getBackgrond(index: number) : any {

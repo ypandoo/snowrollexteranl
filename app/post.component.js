@@ -27,6 +27,7 @@ var PostComponent = (function () {
         this.timer_id = null;
         this.image_index = 0;
         this.audio_player = null;
+        this.play_wave = 0;
     }
     PostComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -93,13 +94,25 @@ var PostComponent = (function () {
         var tindex = 0;
         clearInterval(this.timer_id);
         this.timer_id = setInterval(function () {
-            if (that.audio_player.isStop())
+            if (that.audio_player.isStop()) {
                 that.span_index = null;
-            else
+                that.play_wave = 0;
+            }
+            else {
                 that.span_index = index;
+                that.checkWave();
+            }
             that.image_index = 3 - (tindex % 3);
             tindex++;
         }, 150);
+    };
+    PostComponent.prototype.checkWave = function () {
+        if (typeof (this.post.music) == 'object') {
+            this.play_wave = 1;
+        }
+        else {
+            this.play_wave = 0;
+        }
     };
     PostComponent.prototype.getBackgrond = function (index) {
         var url = "url(assets/img/vanimation/voiceimg1.svg)";
