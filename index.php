@@ -28,6 +28,7 @@
         <link rel="stylesheet" href="assets/css/styles.min.css">
         <script src="assets/js/audio.js" async></script>
         <script src="assets/js/slider.js" async></script>
+        <script src="assets/js/siriwave.js" async></script>
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
         <script src="node_modules/core-js/client/shim.min.js"></script>
         <script src="node_modules/zone.js/dist/zone.js"></script>
