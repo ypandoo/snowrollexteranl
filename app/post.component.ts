@@ -23,11 +23,14 @@ export class PostComponent implements OnInit {
     slide = -1;
     private slideshow: any = window['SnowRollImageSlider'] || this.returnNull;
     private audioPlayer: any = window['SnowRollAudioPlayer'] || this.returnNull;
+    private wave: any = window['SiriWave'] || this.returnNull;
     private span_index: any = null;
     private timer_id: any = null;
     private image_index: any = 0;
     private audio_player: any = null;
     private play_wave: any = 0;
+    private waveEle: any = null;
+
     constructor(
         private dataService: DataService,
         private route: ActivatedRoute,
@@ -39,6 +42,7 @@ export class PostComponent implements OnInit {
         this.route.params
             .switchMap((params: Params) => this.getData(+params['id']))
             .subscribe(post => this.parseData(post));
+
     }
 
     getData(id: number) : any {
@@ -129,6 +133,7 @@ export class PostComponent implements OnInit {
             {
                 that.span_index = null;
                 that.play_wave = 0;
+                document.getElementById("animate-line").style.display = "none";
             }    
             else
             {
@@ -141,11 +146,22 @@ export class PostComponent implements OnInit {
     }
 
     checkWave(): void {
+        if(!this.waveEle)
+        {
+            this.waveEle = new this.wave({
+                amplitude: 1,
+                container: document.getElementById('animate-line'),
+                autostart: true,
+                style: 'ios9'
+            });
+        }
 
         if (typeof (this.post.music) == 'object') {
-            this.play_wave = 1;
+            //this.play_wave = 1;
+            document.getElementById("animate-line").style.display = "block";
         } else {
-            this.play_wave = 0;
+            //this.play_wave = 0;
+            document.getElementById("animate-line").style.display = "none";
         }
     }
 

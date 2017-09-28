@@ -14,8 +14,9 @@
     <section class="post-content section">
 
         <div class="post-img {{post.img_grid}}-1" [style.background-image]="'url(' + post.image_url + ')'" (click)="openSlideshow(0)">
-            <span *ngFor="let audio of post.audio;let i=index" id = "audio-clip{{i+1}}" class="audio-clip" [style.left]="audio.x*100 +'%'" [style.top]="audio.y*100 +'%'" [style.background-image]="getBackgrond(i+1)" (click)="playAudio(audio.url);iconAnimate(i+1);"></span>
-            <div *ngIf="play_wave" class="animate-line" style="position: absolute;bottom: 40px;left: 0;"></div>
+            <span *ngFor="let audio of post.audio;let i=index" id = "audio-clip{{i+1}}" class="audio-clip" [style.left]="audio.x*100 +'%'" [style.top]="audio.y*100 +'%'" [style.background-image]="getBackgrond(i+1)" (click)="playAudio(audio.url);iconAnimate(i+1);checkWave();"></span>
+            <!-- <div *ngIf="play_wave" class="animate-line" style="position: absolute;bottom: 40px;left: 0;"></div> -->
+            <div id="animate-line" style="position: absolute;bottom: 40px;left: 0; width:100vw; height:90px; display:none"></div>
             <!-- <div class="animate-line2" style="position: absolute;bottom: 10px;left: 0;"></div> -->
         </div>
         <img style="background-image: url('assets/img/vanimation/voiceimg1.svg'); visibility: hidden;">

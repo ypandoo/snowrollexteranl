@@ -23,11 +23,13 @@ var PostComponent = (function () {
         this.slide = -1;
         this.slideshow = window['SnowRollImageSlider'] || this.returnNull;
         this.audioPlayer = window['SnowRollAudioPlayer'] || this.returnNull;
+        this.wave = window['SiriWave'] || this.returnNull;
         this.span_index = null;
         this.timer_id = null;
         this.image_index = 0;
         this.audio_player = null;
         this.play_wave = 0;
+        this.waveEle = null;
     }
     PostComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -97,6 +99,7 @@ var PostComponent = (function () {
             if (that.audio_player.isStop()) {
                 that.span_index = null;
                 that.play_wave = 0;
+                document.getElementById("animate-line").style.display = "none";
             }
             else {
                 that.span_index = index;
@@ -107,11 +110,21 @@ var PostComponent = (function () {
         }, 150);
     };
     PostComponent.prototype.checkWave = function () {
+        if (!this.waveEle) {
+            this.waveEle = new this.wave({
+                amplitude: 1,
+                container: document.getElementById('animate-line'),
+                autostart: true,
+                style: 'ios9'
+            });
+        }
         if (typeof (this.post.music) == 'object') {
-            this.play_wave = 1;
+            //this.play_wave = 1;
+            document.getElementById("animate-line").style.display = "block";
         }
         else {
-            this.play_wave = 0;
+            //this.play_wave = 0;
+            document.getElementById("animate-line").style.display = "none";
         }
     };
     PostComponent.prototype.getBackgrond = function (index) {
