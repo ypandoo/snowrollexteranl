@@ -30,6 +30,7 @@ export class PostComponent implements OnInit {
     private audio_player: any = null;
     private play_wave: any = 0;
     private waveEle: any = null;
+    private is_music: any = 0;
 
     constructor(
         private dataService: DataService,
@@ -55,6 +56,7 @@ export class PostComponent implements OnInit {
 
         if( typeof(data.music) == 'object')
         {
+            this.is_music = 1;
             data.images = [data.music.photo];
             data.num_images = 1;
             data.image_url = data.music.photo;
@@ -159,6 +161,7 @@ export class PostComponent implements OnInit {
         if (typeof (this.post.music) == 'object') {
             //this.play_wave = 1;
             document.getElementById("animate-line").style.display = "block";
+            this.playAudio(this.post.audio[0].url);
         } else {
             //this.play_wave = 0;
             document.getElementById("animate-line").style.display = "none";

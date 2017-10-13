@@ -30,6 +30,7 @@ var PostComponent = (function () {
         this.audio_player = null;
         this.play_wave = 0;
         this.waveEle = null;
+        this.is_music = 0;
     }
     PostComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -44,6 +45,7 @@ var PostComponent = (function () {
     PostComponent.prototype.parseData = function (data) {
         this.setMetaData(data);
         if (typeof (data.music) == 'object') {
+            this.is_music = 1;
             data.images = [data.music.photo];
             data.num_images = 1;
             data.image_url = data.music.photo;
@@ -121,6 +123,7 @@ var PostComponent = (function () {
         if (typeof (this.post.music) == 'object') {
             //this.play_wave = 1;
             document.getElementById("animate-line").style.display = "block";
+            this.playAudio(this.post.audio[0].url);
         }
         else {
             //this.play_wave = 0;
