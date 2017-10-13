@@ -26,6 +26,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
         <link rel="icon" sizes="192x192" href="/assets/img/favicon.png">
         <link rel="stylesheet" href="assets/css/styles.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
         <script src="assets/js/audio.js" async></script>
         <script src="assets/js/slider.js" async></script>
         <script src="assets/js/siriwave.js" async></script>
