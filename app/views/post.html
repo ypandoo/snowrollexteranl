@@ -20,8 +20,11 @@
                 [style.background-image]="getBackgrond(i+1)" 
                 (click)="playAudio(audio.url);iconAnimate(i+1);"></span></span>
             <!-- <div *ngIf="play_wave" class="animate-line" style="position: absolute;bottom: 40px;left: 0;"></div> -->
-            <div id="music_play"  *ngIf="is_music" style="position: absolute;top: 0px;left: 0; width:100vw; height:100%;" 
+            <div id="music_play"  *ngIf="is_music" style="position: absolute;top: 0px; left: 0; width:100vw; height:100%;" 
                  (click)="checkWave();"></div>
+            <div *ngIf="is_music" id="intro" style="position: absolute;right: 15px; bottom: 15px;
+             width:40px; height:40px;background-image: url('assets/img/click.png');background-size:100% 100%"
+             class="animated infinite tada"></div>
             <div id="animate-line" style="position: absolute;bottom: 40px;left: 0; width:100vw; height:90px; display:none"></div>
             <!-- <div class="animate-line2" style="position: absolute;bottom: 10px;left: 0;"></div> -->
         </div>

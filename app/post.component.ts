@@ -157,6 +157,7 @@ export class PostComponent implements OnInit {
                 style: 'ios9'
             });
         }
+        document.getElementById("intro").style.display = "none";
 
         if (typeof (this.post.music) == 'object') {
             //this.play_wave = 1;

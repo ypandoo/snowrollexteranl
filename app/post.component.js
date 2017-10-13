@@ -120,6 +120,7 @@ var PostComponent = (function () {
                 style: 'ios9'
             });
         }
+        document.getElementById("intro").style.display = "none";
         if (typeof (this.post.music) == 'object') {
             //this.play_wave = 1;
             document.getElementById("animate-line").style.display = "block";
